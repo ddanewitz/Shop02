@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>productImagePath</param-name>
+        <param-value>img/products/</param-value>
+    </context-param>
+    <context-param>
+        <param-name>categoryImagePath</param-name>
+        <param-value>img/categories/</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mainImagePath</param-name>
+        <param-value>img/</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/WEB-INF/*</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>faces/index.jsp</welcome-file>
+    </welcome-file-list>
+    <jsp-config>
+        <jsp-property-group>
+            <description>header and footer settings</description>
+            <url-pattern>/index.jsp</url-pattern>
+            <url-pattern>/WEB-INF/productInfo.jsp</url-pattern>
+            <url-pattern>/WEB-INF/register.jsp</url-pattern>
+            <url-pattern>/WEB-INF/summarySite.jsp</url-pattern>
+            <url-pattern>/WEB-INF/thankyou.jsp</url-pattern>
+            <url-pattern>/WEB-INF/login.jsp</url-pattern>
+            <url-pattern>/WEB-INF/shoppingCart.jsp</url-pattern>
+            <include-prelude>/WEB-INF/jspf/header.jsp</include-prelude>
+            <include-coda>/WEB-INF/jspf/footer.jsp</include-coda>
+        </jsp-property-group>
+    </jsp-config>
+    <resource-ref>
+        <res-ref-name>jdbc/shop02</res-ref-name>
+        <res-type>javax.sql.ConnectionPoolDataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+</web-app>

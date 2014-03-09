@@ -1,0 +1,128 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16.02.2014, 11:38:42
+    Author     : dima
+*/
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 850px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+#main { background: #eee }
+
+#header {
+    height: 200px;
+    background: #aaa;
+}
+
+#footer {
+    height: 60px;
+    width: 200px;
+    clear: left;
+    background: #aaa;
+}
+
+hr {
+    border: 0;
+    background-color: #333;
+    height: 1px;
+    margin: 0 25px;
+    width: 150px;
+}
+
+#indexLeftColumn {
+    height: 400px;
+    width: 200px;
+    float: left;
+    background: #ccc;
+}
+
+#indexRightColumn {
+    height: 400px;
+    width: 650px;
+    float: left;
+    background: #eee;
+    overflow:auto;
+}
+
+#logo {
+    height: 155px;
+    width: 155px;
+    float: left;
+    margin-left: 30px;
+    margin-top: -20px;
+}
+
+#logoText {
+    float: left;
+    margin: 20px 0 0 70px;
+    /* font styles apply to text within alt tags */
+    font-family: 'American Typewriter', Courier, monospace;
+    font-size: 50px;
+    color: #333;
+}
+
+#widgetBar {
+    height: 50px;
+    width: 850px;
+    float: right;
+    background: #ccc;
+}
+
+.headerWidget {
+    width: 194px;
+    margin: 20px 2px;
+    font-size: small;
+    float: right;
+    line-height: 25px;
+    background: #aaa;
+}
+
+.categoryBox {
+    height: 30px;
+    width: 200px;
+    margin: 21px 14px 6px;
+    float: inherit;
+    background: #ccc;
+}
+
+.categoryLabelText {
+    line-height: 150%;
+    font-size: x-large;
+}
+
+.productBox {
+    height: 140px;
+    width: 200px;
+    margin: 21px 14px 6px;
+    float: inherit;
+    background: #acc;
+}
+
+.productCartBox {
+    height: 170px;
+    width: 200px;
+    margin: 21px 14px 6px;
+    float: inherit;
+    background: #acc;
+}
+
+.productInfoBox {
+    height: 250px;
+    width: 250px;
+    margin: 21px 14px 6px;
+    float: inherit;
+    background: #acc;
+}
+
+#message {
+    /* font styles apply to text within alt tags */
+    color: #e00;
+}

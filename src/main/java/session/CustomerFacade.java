@@ -1,0 +1,42 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package session;
+
+import entity.Customer;
+import entity.Product;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+/**
+ *
+ * @author dima
+ */
+@Stateless
+public class CustomerFacade extends AbstractFacade<Customer> {
+    @PersistenceContext(unitName = "com.mycompany_Shop02_war_1.0-SNAPSHOTPU")
+    private EntityManager em;
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public CustomerFacade() {
+        super(Customer.class);
+    }
+    
+    public Customer findUser(String email) { 
+        TypedQuery<Customer> query = em.createNamedQuery("Customer.findByEmail", Customer.class); 
+        query.setParameter("email", email); 
+        return query.getSingleResult(); 
+    }
+    
+    
+}
