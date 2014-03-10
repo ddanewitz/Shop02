@@ -37,7 +37,7 @@
                 <form name="adminlogin" method="post" action="adminlogin">
                 <br>
                 Email: <input type="text" name="username" maxlength="20" size="17">
-                Password: <input type=password name="password" maxlength="20" size="17">
+                Passwort: <input type=password name="password" maxlength="20" size="17">
                 <br><input type="SUBMIT" name="Admin Log in" value="Admin Log in">
                 </form>
                 

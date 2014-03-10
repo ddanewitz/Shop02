@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package controller;
 
 import cart.ShoppingCart;
@@ -83,25 +77,18 @@ public class ControllerServlet extends HttpServlet {
 
         getServletContext().setAttribute("categories", categoryFacade.findAll());
     }
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
 
         String userPath = request.getServletPath();
 
-        // if category page is requested
         if (userPath.equals("/category")) {
             Category selectedCategory;
             Collection<Product> categoryProducts;
             
-            // get categoryId from request
+            // categoryId holen
             int categoryId = Integer.parseInt(request.getQueryString());
             selectedCategory = categoryFacade.find((short)categoryId);
             categoryProducts = selectedCategory.getProductCollection();
@@ -109,7 +96,6 @@ public class ControllerServlet extends HttpServlet {
             
             userPath = "/index";
 
-        // if cart page is requested
         } else if (userPath.equals("/searchProduct")) {
             Collection<Product> searchProducts;
             String searchString = request.getParameter("searchString");
@@ -140,7 +126,6 @@ public class ControllerServlet extends HttpServlet {
             
         }
 
-        // use RequestDispatcher to forward request internally
         String url = userPath + ".jsp";
 
         try {
@@ -150,13 +135,7 @@ public class ControllerServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -167,7 +146,6 @@ public class ControllerServlet extends HttpServlet {
         Customer user = (Customer) session.getAttribute("user");
         Admin admin = (Admin) session.getAttribute("admin");
 
-        // if addToCart action is called
         if (userPath.equals("/addToCart")) {
             if(cart == null){
                 cart = new ShoppingCart();
@@ -196,6 +174,7 @@ public class ControllerServlet extends HttpServlet {
             userPath = "/WEB-INF/shoppingCart";
         }
         
+        //Loginseite. Es wird bei erfolgreicher Suche der Email-Adresse ein Customer-Objekt erstellt.
         else if (userPath.equals("/login")) {
             String userEmail = request.getParameter("email");
             String passwort = request.getParameter("password");
@@ -207,6 +186,7 @@ public class ControllerServlet extends HttpServlet {
                 userPath = "/WEB-INF/login";
             }
             
+            //Passwortüberpfürung
             if(user != null){
                 String userPasswort = user.getPasswort();
                 if(UtilEncryption.encryptPassword(passwort).equals(userPasswort)){
@@ -222,6 +202,7 @@ public class ControllerServlet extends HttpServlet {
             
         }
         
+        //Registrierung. sameAddress dient bei gleicher Liefer- und Rechnungsadressen zur schnellen Eingabe
         else if (userPath.equals("/register")) {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
@@ -273,6 +254,7 @@ public class ControllerServlet extends HttpServlet {
 
         }
         
+        //Bei drücken des Bestellbuttons überprüfen, ob der User eingeloggt ist
         else if (userPath.equals("/order")) {
             
             if(session.getAttribute("user") != null){
@@ -345,6 +327,7 @@ public class ControllerServlet extends HttpServlet {
             else userPath = "/index";
         }
         
+        //Bestellungen bearbeiten
         else if (userPath.equals("/adminorderedit")) {
             if(session.getAttribute("admin") != null){
                 Collection<CustomerOrder> allOrders;
@@ -357,6 +340,7 @@ public class ControllerServlet extends HttpServlet {
             else userPath = "/index";
         }
         
+        //Bestellstatus ändern
         else if (userPath.equals("/changeStatus")) {
             if(session.getAttribute("admin") != null){
                 
@@ -445,8 +429,7 @@ public class ControllerServlet extends HttpServlet {
             else userPath = "/index";
         }
         
-
-        // use RequestDispatcher to forward request internally
+        //Zusammensetzen der URL
         String url = userPath + ".jsp";
 
         try {
@@ -456,6 +439,7 @@ public class ControllerServlet extends HttpServlet {
         }
     }
     
+    //Methode zur Prüfung, ob Eingabe eine Zahl ist
     public static boolean isNumeric(String str)  
     {  
         try  

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* Klasse zum Bearbeiten der Daten in der Datenbank*/
 
 package session;
 
@@ -48,6 +44,7 @@ public class DataBaseManager {
     @PersistenceContext(unitName = "com.mycompany_Shop02_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
+    //Customer in die Datenbank hinzufügen
     public Customer addCustomer(String name, String email, String lieferadresse_str, String lieferadresse_stadt, String rechnungsadresse_str, String rechnungsadresse_stadt, String passwort) {
 
         Customer customer = new Customer();
@@ -66,6 +63,7 @@ public class DataBaseManager {
         return customer;
     }
 
+    //Bestellung in die Datenbank hinzufügen
     public int placeOrder(Customer user, ShoppingCart cart) {
         CustomerOrder order = addOrder(user, cart);
         addOrderedItems(order, cart);
@@ -75,14 +73,14 @@ public class DataBaseManager {
     private CustomerOrder addOrder(Customer customer, ShoppingCart cart) {
 
 
-        // set up customer order
+        //Bestellung einstellen
         CustomerOrder order = new CustomerOrder();
         order.setCustomerId(customer);
         cart.calculateTotal();
         double test = cart.getTotal() + 10.0;
         order.setAmount(BigDecimal.valueOf(test));
 
-        // create confirmation number
+        //Bestätigungsnummer
         Random random = new Random();
         int i = random.nextInt(999999999);
         order.setConfirmationNumber(i);
@@ -91,7 +89,6 @@ public class DataBaseManager {
             em.persist(order);
         } catch (ConstraintViolationException e){
             Set set = e.getConstraintViolations();
-            int test2 = 0;
         }
         return order;
     }
@@ -107,26 +104,24 @@ public class DataBaseManager {
         
         List<ShoppingCartItem> items = cart.getItems();
 
-        // iterate through shopping cart and create OrderedProducts
+        //aus dem Warenkorb OrderedProducts erstellen
         for (ShoppingCartItem scItem : items) {
 
             int productId = scItem.getProduct().getId();
 
-            // set up primary key object
             OrderedProductPK orderedProductPK = new OrderedProductPK();
             orderedProductPK.setCustomerOrderId(order.getId());
             orderedProductPK.setProductId(productId);
 
-            // create ordered item using PK object
             OrderedProduct orderedItem = new OrderedProduct(orderedProductPK);
 
-            // set quantity
             orderedItem.setQuantity(scItem.getQuantity());
             
             em.persist(orderedItem);
         }
     }
     
+    //Admin verändert Daten des Produkts
     public void changeProduct(Product product, String column, String value) {
         Product changeProduct = em.find(Product.class, product.getId());
         
@@ -146,12 +141,14 @@ public class DataBaseManager {
         em.flush();
     }
     
+    //Admin löscht Produkt
     public void deleteProduct(Product product) {
         Product changeProduct = em.find(Product.class, product.getId());
         
         em.remove(changeProduct);
     }
     
+    //Admin erstellt Produkt
     public void newProduct(String name, String price, String description, List<Category> categoryList) {
         BigDecimal dec = new BigDecimal(Double.parseDouble(price));
         dec.setScale(2, RoundingMode.CEILING);
@@ -169,6 +166,7 @@ public class DataBaseManager {
         }
     }
     
+    //Admin verändert Bestellstatus
     public void changeOrderStatus(CustomerOrder order, Customer customer) {
         CustomerOrder changeOrder = em.find(CustomerOrder.class, order.getId());
         
@@ -178,6 +176,7 @@ public class DataBaseManager {
             em.merge(changeOrder);
             em.flush();
             
+            //Email versenden
             final String username = "danewitz.shop@gmail.com";
             final String password = "pass";
 

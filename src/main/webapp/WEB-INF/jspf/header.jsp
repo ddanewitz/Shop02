@@ -23,7 +23,7 @@
                     <div class="headerWidget">
                         <c:choose>
                             <c:when test="${user!=null}">
-                                Welcome, ${user.name}
+                                Willkommen, ${user.name}
                             </c:when>
 
                             <c:otherwise>
@@ -38,21 +38,16 @@
                         <c:choose>
                             <c:when test="${cart!=null}">
                                 <a href="shoppingCart">
-                                    [Shopping cart]
+                                    [Warenkorb]
                             </c:when>
 
                             <c:otherwise>
-                                [Shopping cart is empty]
+                                [Warenkorb ist leer]
                             </c:otherwise>
                       </c:choose>
                     </div>
                 </div>
-                
-                <a href="#">
-                    <img src="${initParam.mainImagePath}logo.png" id="logo" alt="Affable Bean logo">
-                </a>
 
-                <img src="${initParam.mainImagePath}schrift.png" id="logoText" alt="the affable bean">
                 
             </div>
             
@@ -73,7 +68,7 @@
                 <form name="form1" method="get" action="searchProduct">
                     <br>
                     <input type="text" name="searchString" maxlength="20" size="17">
-                    <br><input type="SUBMIT" name="Search" value="Search">
+                    <br><input type="SUBMIT" name="Suchen" value="Suchen">
                 </form>
 
                 

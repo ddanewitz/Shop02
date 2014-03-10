@@ -1,1 +1,3 @@
-Danke für Ihre Bestellung!
+<div id="indexRightColumn">
+    Danke für Ihre Bestellung!
+</div>

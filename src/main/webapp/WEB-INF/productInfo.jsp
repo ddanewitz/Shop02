@@ -15,7 +15,7 @@
             </tr>
             <td>
                 <form name="form2" method="post" action="addToCart">
-                    <input type="SUBMIT" name="add to cart" value="add to cart">
+                    <input type="SUBMIT" name="in Warenkorb" value="in Warenkorb">
                     <input type="hidden"
                             name="productId"
                             value="${selectedProduct.id}">
